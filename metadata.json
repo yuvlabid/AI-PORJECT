@@ -1,0 +1,6 @@
+{
+  "name": "RecallForge — CBSE & Active-Recall Studio",
+  "description": "Transform lecture notes, NCERT excerpts, and study documents into rigorous CBSE-aligned active-recall flashcards and diagnostic quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
