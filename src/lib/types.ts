@@ -1,20 +1,13 @@
 export type ModelId = 'gemini-3.5-flash-lite' | 'gemini-3.8-flash';
 
 export type SyllabusTrack =
-  | 'CBSE Class 12 Physics'
-  | 'CBSE Class 12 Chemistry'
-  | 'CBSE Class 12 Mathematics'
-  | 'CBSE Class 12 Biology'
-  | 'CBSE Class 12 Computer Science'
-  | 'CBSE Class 10 Science'
-  | 'CBSE Class 10 Mathematics'
-  | 'JEE / NEET Conceptual Bridge'
-  | 'University STEM & Engineering';
+  | 'CBSE Class 10 (All Subjects)'
+  | 'CBSE Class 11–12 (All Subjects)'
+  | 'Competitive Exams (JEE / NEET / CUET)'
+  | 'College & University'
+  | 'General Study & Certifications';
 
-export type RigorLevel =
-  | 'Board Conceptual'
-  | 'Application & HOTS'
-  | 'Edge-Case & Olympiad';
+export type RigorLevel = 'Standard' | 'Challenge' | 'Advanced';
 
 export type OutputMode = 'flashcards' | 'quiz' | 'mixed';
 

@@ -121,8 +121,8 @@ async function startServer() {
       const body = (req.body ?? {}) as Partial<GenerateRequestPayload>;
       const notesText = typeof body.notesText === 'string' ? body.notesText : '';
       const attachment = body.attachment ?? null;
-      const syllabus = (body.syllabus ?? 'CBSE Class 12 Physics') as SyllabusTrack;
-      const rigor = (body.rigor ?? 'Application & HOTS') as RigorLevel;
+      const syllabus = (body.syllabus ?? 'CBSE Class 11–12 (All Subjects)') as SyllabusTrack;
+      const rigor = (body.rigor ?? 'Challenge') as RigorLevel;
       const outputMode = (body.outputMode ?? 'mixed') as OutputMode;
       const itemCount = typeof body.itemCount === 'number' ? body.itemCount : 6;
       const model = body.model ?? 'gemini-3.5-flash-lite';

@@ -13,15 +13,11 @@ import type {
 } from './types';
 
 export const SYLLABUS_OPTIONS: readonly SyllabusTrack[] = [
-  'CBSE Class 12 Physics',
-  'CBSE Class 12 Chemistry',
-  'CBSE Class 12 Mathematics',
-  'CBSE Class 12 Biology',
-  'CBSE Class 12 Computer Science',
-  'CBSE Class 10 Science',
-  'CBSE Class 10 Mathematics',
-  'JEE / NEET Conceptual Bridge',
-  'University STEM & Engineering',
+  'CBSE Class 10 (All Subjects)',
+  'CBSE Class 11–12 (All Subjects)',
+  'Competitive Exams (JEE / NEET / CUET)',
+  'College & University',
+  'General Study & Certifications',
 ] as const;
 
 export const RIGOR_OPTIONS: readonly {
@@ -29,16 +25,16 @@ export const RIGOR_OPTIONS: readonly {
   summary: string;
 }[] = [
   {
-    value: 'Board Conceptual',
-    summary: 'NCERT mechanism mastery, SI units, sign conventions, and 3-mark reasoning.',
+    value: 'Standard',
+    summary: 'Core concepts, clear reasoning, and essential exam fundamentals.',
   },
   {
-    value: 'Application & HOTS',
-    summary: 'Multi-step causal chains, assertion-reason traps, and case-study perturbations.',
+    value: 'Challenge',
+    summary: 'Apply ideas to new situations, multi-step problems, and common traps.',
   },
   {
-    value: 'Edge-Case & Olympiad',
-    summary: 'Boundary conditions, non-ideal regimes, mathematical trade-offs, and failure modes.',
+    value: 'Advanced',
+    summary: 'Tricky edge cases, deeper problem-solving, and tough exam twists.',
   },
 ] as const;
 
@@ -52,13 +48,13 @@ export const MODEL_OPTIONS: readonly {
     id: 'gemini-3.5-flash-lite',
     label: 'Fast Mode',
     badge: 'gemini-3.5-flash-lite',
-    description: 'Default · Higher free-tier quota & lowest latency (minimal thinking).',
+    description: 'Best for everyday study · Faster replies and higher daily quota.',
   },
   {
     id: 'gemini-3.8-flash',
     label: 'High Precision',
     badge: 'gemini-3.8-flash',
-    description: 'Deeper causal reasoning for dense derivations & edge cases.',
+    description: 'Best for tough chapters · Deeper checking for complex topics.',
   },
 ] as const;
 
@@ -128,14 +124,14 @@ export function validateGenerateInput(input: {
   if (!trimmedNotes && !hasAttachment) {
     return {
       valid: false,
-      error: 'Paste lecture notes or upload a study document (.pdf, .txt, .md, or image) before generating.',
+      error: 'Please paste your study notes or attach a file (.pdf, .txt, .md, or image) first.',
     };
   }
 
   if (trimmedNotes && trimmedNotes.length < MIN_NOTES_LENGTH && !hasAttachment) {
     return {
       valid: false,
-      error: `Please enter at least ${MIN_NOTES_LENGTH} characters of study material so atomic concepts can be extracted.`,
+      error: `Please add at least ${MIN_NOTES_LENGTH} characters of notes so we can build good questions.`,
     };
   }
 

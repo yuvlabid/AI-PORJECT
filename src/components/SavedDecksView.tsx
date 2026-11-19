@@ -47,25 +47,25 @@ export function SavedDecksView({
 
   return (
     <section aria-labelledby="library-heading" className="space-y-6">
-      <div className="flex flex-col gap-4 border-b border-slate-200 pb-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 border-b border-white/60 pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-1">
           <h1
             id="library-heading"
             className="font-display text-2xl font-bold text-slate-900 sm:text-3xl"
           >
-            Saved Recall Decks
+            Saved Study Decks
           </h1>
-          <p className="text-sm text-slate-600">
-            Stored locally in your browser. Reopen for spaced repetition or export to Anki CSV and Markdown.
+          <p className="text-sm text-slate-700">
+            Saved in your browser. Open any deck to study again or download for Anki and Markdown.
           </p>
         </div>
 
         <button
           type="button"
           onClick={onGoToStudio}
-          className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-xs font-semibold text-white whitespace-nowrap shrink-0 hover:bg-blue-800"
+          className="mac-btn-primary inline-flex items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold whitespace-nowrap shrink-0"
         >
-          Forge New Deck
+          Create New Deck
         </button>
       </div>
 
@@ -74,7 +74,7 @@ export function SavedDecksView({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative flex-1 max-w-md">
             <Search
-              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-slate-500"
               aria-hidden="true"
             />
             <label htmlFor="deck-search" className="sr-only">
@@ -85,22 +85,22 @@ export function SavedDecksView({
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search deck title, topic, or chapter..."
-              className="w-full rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/15"
+              placeholder="Search deck title or notes..."
+              className="w-full rounded-xl border border-white/80 bg-white/60 backdrop-blur-md py-2 pl-10 pr-3 text-sm text-slate-900 placeholder:text-slate-500 focus:border-[#0063D1]/60 focus:bg-white/90 focus:outline-none focus:ring-3 focus:ring-[#0063D1]/15"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <label htmlFor="library-syllabus-filter" className="text-xs font-medium text-slate-600">
-              Syllabus:
+            <label htmlFor="library-syllabus-filter" className="text-xs font-medium text-slate-700">
+              Level:
             </label>
             <select
               id="library-syllabus-filter"
               value={syllabusFilter}
               onChange={(e) => setSyllabusFilter(e.target.value)}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-800 focus:border-blue-600 focus:outline-none"
+              className="rounded-xl border border-white/80 bg-white/60 backdrop-blur-md px-3 py-2 text-xs font-medium text-slate-800 focus:border-[#0063D1]/60 focus:bg-white/90 focus:outline-none"
             >
-              <option value="all">All Tracks ({decks.length})</option>
+              <option value="all">All Levels ({decks.length})</option>
               {uniqueSyllabi.map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -113,7 +113,7 @@ export function SavedDecksView({
 
       {/* Deck List */}
       {decks.length === 0 ? (
-        <div className="rounded-xl border border-slate-200 bg-white p-10 text-center space-y-4">
+        <div className="mac-glass rounded-2xl p-10 text-center space-y-4">
           <h2 className="font-display text-xl font-semibold text-slate-900">
             No Saved Decks Yet
           </h2>
@@ -124,13 +124,13 @@ export function SavedDecksView({
           <button
             type="button"
             onClick={onGoToStudio}
-            className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-800"
+            className="mac-btn-primary inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold"
           >
             Create Your First Deck
           </button>
         </div>
       ) : filteredDecks.length === 0 ? (
-        <div className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-600">
+        <div className="mac-glass rounded-2xl p-8 text-center text-sm text-slate-600">
           No saved decks match &ldquo;{searchQuery}&rdquo;.
         </div>
       ) : (
@@ -141,8 +141,8 @@ export function SavedDecksView({
             return (
               <article
                 key={deck.id}
-                className={`flex flex-col justify-between rounded-xl border bg-white p-5 ${
-                  isActive ? 'border-blue-600' : 'border-slate-200'
+                className={`mac-glass flex flex-col justify-between rounded-2xl p-5 transition-all ${
+                  isActive ? 'ring-2 ring-[#0062CC]/50' : ''
                 }`}
               >
                 <div className="space-y-2">
@@ -151,7 +151,7 @@ export function SavedDecksView({
                       {deck.syllabus} · {deck.rigor}
                     </span>
                     {isActive && (
-                      <span className="font-semibold text-blue-700">Active</span>
+                      <span className="font-semibold text-[#005BB5]">Active</span>
                     )}
                   </div>
                   <h2 className="font-display text-lg font-semibold text-slate-900">
@@ -166,13 +166,13 @@ export function SavedDecksView({
                   </p>
                 </div>
 
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-4">
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-slate-900/[0.07] pt-4">
                   <div className="flex items-center gap-2">
                     {deck.flashcards.length > 0 && (
                       <button
                         type="button"
                         onClick={() => onOpenDeck(deck, 'recall')}
-                        className="rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-800"
+                        className="mac-btn-primary rounded-xl px-3.5 py-1.5 text-xs font-semibold"
                       >
                         Study Cards
                       </button>
@@ -181,7 +181,7 @@ export function SavedDecksView({
                       <button
                         type="button"
                         onClick={() => onOpenDeck(deck, 'quiz')}
-                        className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 hover:bg-slate-50"
+                        className="mac-glass-subtle rounded-xl px-3.5 py-1.5 text-xs font-semibold text-slate-800 hover:bg-white"
                       >
                         Take Quiz
                       </button>
@@ -193,7 +193,7 @@ export function SavedDecksView({
                       type="button"
                       aria-label={`Export ${deck.title} as Anki CSV`}
                       onClick={() => onExportCsv(deck)}
-                      className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                      className="mac-glass-subtle inline-flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-white"
                     >
                       <Download className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>CSV</span>
@@ -202,7 +202,7 @@ export function SavedDecksView({
                       type="button"
                       aria-label={`Export ${deck.title} as Markdown`}
                       onClick={() => onExportMarkdown(deck)}
-                      className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                      className="mac-glass-subtle inline-flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-white"
                     >
                       <FileText className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>MD</span>
@@ -211,7 +211,7 @@ export function SavedDecksView({
                       type="button"
                       aria-label={`Delete deck ${deck.title}`}
                       onClick={() => onDeleteDeck(deck.id)}
-                      className="inline-flex items-center justify-center rounded-lg border border-slate-200 p-1.5 text-slate-500 hover:border-red-200 hover:bg-red-50 hover:text-red-700"
+                      className="inline-flex items-center justify-center rounded-xl border border-slate-900/[0.08] bg-white/60 p-1.5 text-slate-500 hover:border-red-200 hover:bg-red-50 hover:text-red-700"
                     >
                       <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
                     </button>

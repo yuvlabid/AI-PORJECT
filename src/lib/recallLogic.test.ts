@@ -16,15 +16,15 @@ import { SAMPLE_PRESETS } from './sampleDecks';
 
 test('buildSystemInstruction injects syllabus, rigor, and anti-trivia/atomic rules', () => {
   const prompt = buildSystemInstruction({
-    syllabus: 'CBSE Class 12 Physics',
-    rigor: 'Edge-Case & Olympiad',
+    syllabus: 'CBSE Class 11–12 (All Subjects)',
+    rigor: 'Advanced',
     outputMode: 'mixed',
     itemCount: 8,
   });
 
   assert.match(prompt, /Principal Instructional Designer/);
-  assert.match(prompt, /CBSE Class 12 Physics/);
-  assert.match(prompt, /Edge-Case & Olympiad/);
+  assert.match(prompt, /CBSE Class 11–12 \(All Subjects\)/);
+  assert.match(prompt, /Advanced/);
   assert.match(prompt, /Ban Trivia & Rote Lookups/);
   assert.match(prompt, /Atomic Boundaries/);
   assert.match(prompt, /4 atomic active-recall flashcards and 4 diagnostic quizQuestions/);
@@ -114,8 +114,8 @@ test('normalizeGeneratedDeck bounds invalid correctIndex and populates defaults'
       ],
     },
     {
-      syllabus: 'CBSE Class 12 Chemistry',
-      rigor: 'Board Conceptual',
+      syllabus: 'CBSE Class 11–12 (All Subjects)',
+      rigor: 'Standard',
       outputMode: 'mixed',
       modelUsed: 'gemini-3.5-flash-lite',
       sourceExcerpt: 'Nernst equation...',

@@ -12,33 +12,29 @@ OutputMode = Literal["mixed", "flashcards", "quiz"]
 FlashcardRating = Literal["again", "hard", "mastered"]
 
 SYLLABUS_OPTIONS: tuple[str, ...] = (
-    "CBSE Class 12 Physics",
-    "CBSE Class 12 Chemistry",
-    "CBSE Class 12 Mathematics",
-    "CBSE Class 12 Biology",
-    "CBSE Class 12 Computer Science",
-    "CBSE Class 10 Science",
-    "CBSE Class 10 Mathematics",
-    "JEE / NEET Conceptual Bridge",
-    "University STEM & Engineering",
+    "CBSE Class 10 (All Subjects)",
+    "CBSE Class 11–12 (All Subjects)",
+    "Competitive Exams (JEE / NEET / CUET)",
+    "College & University",
+    "General Study & Certifications",
 )
 
 RIGOR_OPTIONS: dict[str, str] = {
-    "Board Conceptual": "NCERT mechanism mastery, SI units, sign conventions, and 3-mark reasoning.",
-    "Application & HOTS": "Multi-step causal chains, assertion-reason traps, and case-study perturbations.",
-    "Edge-Case & Olympiad": "Boundary conditions, non-ideal regimes, mathematical trade-offs, and failure modes.",
+    "Standard": "Core concepts, clear reasoning, and essential exam fundamentals.",
+    "Challenge": "Apply ideas to new situations, multi-step problems, and common traps.",
+    "Advanced": "Tricky edge cases, deeper problem-solving, and tough exam twists.",
 }
 
 MODEL_OPTIONS: dict[ModelId, dict[str, str]] = {
     "gemini-3.5-flash-lite": {
         "label": "Fast Mode (gemini-3.5-flash-lite)",
         "thinking_level": "MINIMAL",
-        "description": "Default · Higher free-tier daily quota and lowest latency (minimal thinking).",
+        "description": "Best for everyday study · Faster replies and higher daily quota.",
     },
     "gemini-3.8-flash": {
         "label": "High Precision (gemini-3.8-flash)",
         "thinking_level": "LOW",
-        "description": "Deeper causal reasoning for dense derivations & edge cases.",
+        "description": "Best for tough chapters · Deeper checking for complex topics.",
     },
 }
 

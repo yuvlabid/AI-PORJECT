@@ -30,6 +30,55 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #dce9fb;
+        background-image:
+            radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.34) 0px, transparent 42%),
+            radial-gradient(circle at 88% 14%, rgba(14, 165, 233, 0.30) 0px, transparent 40%),
+            radial-gradient(circle at 75% 84%, rgba(37, 99, 235, 0.24) 0px, transparent 46%),
+            linear-gradient(145deg, #eaf2fe 0%, #d4e6fc 50%, #e1edfd 100%);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Plus Jakarta Sans", sans-serif;
+    }
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.64) 0%, rgba(240, 247, 255, 0.48) 100%) !important;
+        backdrop-filter: blur(32px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(32px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.82) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 14px 36px -10px rgba(15, 58, 128, 0.14), inset 0 1.5px 1px rgba(255, 255, 255, 0.95) !important;
+    }
+    .stButton > button[kind="primary"], .stDownloadButton > button {
+        background: linear-gradient(180deg, #1b86f5 0%, #0063d1 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.28) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 4px 14px -2px rgba(0, 99, 209, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.38) !important;
+    }
+    .stButton > button[kind="secondary"] {
+        background: rgba(255, 255, 255, 0.50) !important;
+        backdrop-filter: blur(20px) saturate(165%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.78) !important;
+        border-radius: 14px !important;
+    }
+    .stTabs [data-baseweb="tab-list"] {
+        background: rgba(15, 58, 128, 0.06);
+        backdrop-filter: blur(18px);
+        padding: 4px;
+        border-radius: 14px;
+        gap: 4px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 10px;
+        padding: 6px 14px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 def get_server_api_key() -> str:
     """Reads GEMINI_API_KEY strictly from server env or Streamlit secrets (never UI)."""
@@ -202,11 +251,11 @@ with header_right:
             st.rerun()
 
 tab_studio, tab_recall, tab_quiz, tab_library = st.tabs(
-    ["Studio", "Active Recall", "Diagnostic Quiz", "Saved Decks"]
+    ["Studio", "Flashcards", "Quiz", "Saved Decks"]
 )
 
 with tab_studio:
-    st.subheader("Quick CBSE Presets")
+    st.subheader("Try Sample Notes")
     preset_cols = st.columns(len(SAMPLE_PRESETS))
     for col, preset in zip(preset_cols, SAMPLE_PRESETS):
         with col:
@@ -218,30 +267,30 @@ with tab_studio:
     left_col, right_col = st.columns([1.2, 1], gap="large")
     with left_col:
         notes_input = st.text_area(
-            "Source Material & Lecture Excerpts",
+            "Your Study Notes",
             value=st.session_state.notes_text,
             height=290,
-            placeholder="Paste NCERT paragraphs, derivations, circuit laws, reaction mechanisms, or messy lecture notes...",
+            placeholder="Paste class notes, textbook chapters, history timelines, economics concepts, or formulas from any subject...",
         )
         st.session_state.notes_text = notes_input
 
         uploaded_file = st.file_uploader(
-            "Attach textbook PDF, Markdown notes, or diagram photo (max 8 MB)",
+            "Attach a PDF, notes file, or page photo (max 8 MB)",
             type=["pdf", "txt", "md", "csv", "png", "jpg", "jpeg", "webp"],
         )
 
     with right_col:
         syllabus = st.selectbox(
-            "Syllabus Alignment",
+            "Study Level (Works for Any Subject)",
             options=list(SYLLABUS_OPTIONS),
             index=list(SYLLABUS_OPTIONS).index(st.session_state.selected_syllabus)
             if st.session_state.selected_syllabus in SYLLABUS_OPTIONS
-            else 0,
+            else 1,
         )
         st.session_state.selected_syllabus = syllabus
 
         rigor = st.radio(
-            "Cognitive Rigor",
+            "Difficulty",
             options=list(RIGOR_OPTIONS.keys()),
             index=1,
             horizontal=True,
@@ -250,25 +299,25 @@ with tab_studio:
 
         mode_col, count_col = st.columns(2)
         with mode_col:
-            output_mode_label = st.selectbox("Output Mode", ["Mixed", "Cards Only", "Quiz Only"])
+            output_mode_label = st.selectbox("What to Create", ["Both", "Cards Only", "Quiz Only"])
             output_mode_map: dict[str, OutputMode] = {
-                "Mixed": "mixed",
+                "Both": "mixed",
                 "Cards Only": "flashcards",
                 "Quiz Only": "quiz",
             }
             output_mode: OutputMode = output_mode_map[output_mode_label]
         with count_col:
-            item_count = st.selectbox("Atomic Items", [4, 6, 8, 12], index=1)
+            item_count = st.selectbox("Number of Questions", [4, 6, 8, 12], index=1)
 
         model_id: ModelId = st.radio(
-            "Reasoning Engine",
+            "Speed & Quality",
             options=list(MODEL_OPTIONS.keys()),
             format_func=lambda m: MODEL_OPTIONS[m]["label"],
             index=0,
         )
         st.caption(MODEL_OPTIONS[model_id]["description"])
 
-        if st.button("Forge Recall Set", type="primary", use_container_width=True):
+        if st.button("Create Flashcards & Quiz", type="primary", use_container_width=True):
             has_file = uploaded_file is not None
             mime = infer_mime_type(uploaded_file.name, uploaded_file.type) if has_file else None
             size = uploaded_file.size if has_file else 0

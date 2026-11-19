@@ -32,8 +32,8 @@ export default function App() {
   // Input Studio state
   const [notesText, setNotesText] = useState('');
   const [attachment, setAttachment] = useState<UploadedAttachment | null>(null);
-  const [syllabus, setSyllabus] = useState<SyllabusTrack>('CBSE Class 12 Physics');
-  const [rigor, setRigor] = useState<RigorLevel>('Application & HOTS');
+  const [syllabus, setSyllabus] = useState<SyllabusTrack>('CBSE Class 11–12 (All Subjects)');
+  const [rigor, setRigor] = useState<RigorLevel>('Challenge');
   const [outputMode, setOutputMode] = useState<OutputMode>('mixed');
   const [itemCount, setItemCount] = useState<number>(6);
   const [model, setModel] = useState<ModelId>('gemini-3.5-flash-lite');
@@ -266,7 +266,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
+    <div className="mac-canvas min-h-screen text-slate-900 flex flex-col">
       <Header
         activeTab={activeTab}
         onSelectTab={setActiveTab}
@@ -335,8 +335,8 @@ export default function App() {
         )}
       </main>
 
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <footer className="border-t border-slate-900/[0.07] bg-white/50 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p>RecallForge — CBSE &amp; Active-Recall Studio</p>
           <p>Decks persist locally in your browser · Anki CSV &amp; Markdown ready</p>
         </div>
@@ -346,7 +346,7 @@ export default function App() {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-5 right-5 z-40 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2.5 text-xs font-medium text-white shadow-lg"
+          className="fixed bottom-5 right-5 z-40 rounded-2xl border border-white/25 bg-slate-900/85 backdrop-blur-xl px-4 py-2.5 text-xs font-medium text-white shadow-xl"
         >
           {toastMessage}
         </div>

@@ -74,13 +74,13 @@ export function InputStudio({
     const inferredMime = inferMimeType(file);
     if (!ALLOWED_ATTACHMENT_MIME_TYPES.has(inferredMime)) {
       setFileError(
-        `Unsupported file format (${file.name}). Upload PDF, TXT, MD, CSV, PNG, JPG, or WEBP.`
+        `Unsupported file (${file.name}). Please upload a PDF, TXT, MD, CSV, PNG, JPG, or WEBP file.`
       );
       return;
     }
 
     if (file.size > MAX_ATTACHMENT_BYTES) {
-      setFileError('File exceeds the 8 MB upload limit. Please upload a smaller excerpt.');
+      setFileError('File is larger than 8 MB. Please upload a smaller file.');
       return;
     }
 
@@ -109,7 +109,7 @@ export function InputStudio({
         });
       }
     } catch {
-      setFileError('Unable to read the selected file. Please try again.');
+      setFileError('Could not read the selected file. Please try again.');
     }
   };
 
@@ -135,35 +135,35 @@ export function InputStudio({
   return (
     <section aria-labelledby="studio-heading" className="space-y-8">
       {/* Studio Intro */}
-      <div className="flex flex-col gap-3 border-b border-slate-200 pb-6 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex flex-col gap-4 border-b border-white/60 pb-6 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl space-y-2">
-          <p className="text-xs font-medium tracking-wide text-slate-500">
-            CBSE &amp; Active-Recall Studio · Anti-Trivia Engine
+          <p className="text-xs font-semibold tracking-wide text-[#005BB5]">
+            RecallForge Study Studio · Any Subject
           </p>
           <h1
             id="studio-heading"
             className="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl text-balance"
           >
-            Turn raw lecture notes into mechanism-first recall sets
+            Turn your notes into clear flashcards and practice quizzes
           </h1>
-          <p className="text-base leading-relaxed text-slate-600">
-            Paste NCERT chapters, derivations, or upload textbook pages. RecallForge rejects
-            bare definitions and isolates one testable causal chain, sign convention, or edge case per item.
+          <p className="text-base leading-relaxed text-slate-700">
+            Paste your notes or upload a textbook page from any subject. RecallForge creates
+            focused questions that test how ideas work and where students make mistakes—not simple memorization.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
-          <span className="text-xs font-medium text-slate-500 mr-1">
-            Quick CBSE Presets:
+          <span className="text-xs font-medium text-slate-600 mr-1">
+            Try Sample Notes:
           </span>
           {SAMPLE_PRESETS.map((preset) => (
             <button
               key={preset.id}
               type="button"
               onClick={() => onLoadPresetNotes(preset)}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 whitespace-nowrap shrink-0 transition-colors duration-150 hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-800"
+              className="mac-glass-subtle rounded-xl px-3.5 py-1.5 text-xs font-semibold text-slate-700 whitespace-nowrap shrink-0 transition-all duration-150 hover:bg-white/85 hover:text-[#005BB5]"
             >
-              {preset.label.split(' · ')[0]}
+              {preset.label}
             </button>
           ))}
         </div>
@@ -173,7 +173,7 @@ export function InputStudio({
       {(errorMessage || fileError) && (
         <div
           role="alert"
-          className="flex items-start justify-between gap-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm text-red-900"
+          className="flex items-start justify-between gap-4 rounded-2xl border border-red-300/80 bg-red-50/80 backdrop-blur-xl px-4 py-3.5 text-sm text-red-900 shadow-xs"
         >
           <div className="flex items-start gap-3">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" aria-hidden="true" />
@@ -192,18 +192,18 @@ export function InputStudio({
         </div>
       )}
 
-      {/* Two-Column Workbench */}
+      {/* Two-Column Liquid Glass Workbench */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-stretch">
         {/* Left Zone: Notes & Document Ingestion */}
-        <div className="lg:col-span-6 flex flex-col gap-5 rounded-xl border border-slate-200 bg-white p-5 sm:p-6">
+        <div className="mac-glass lg:col-span-6 flex flex-col gap-5 rounded-3xl p-5 sm:p-6">
           <div className="flex items-center justify-between gap-4">
             <label
               htmlFor="source-notes-input"
               className="text-sm font-semibold text-slate-900"
             >
-              Source Material &amp; Lecture Excerpts
+              Your Study Notes
             </label>
-            <div className="flex items-center gap-3 text-xs text-slate-500 tabular-nums">
+            <div className="flex items-center gap-3 text-xs text-slate-600 tabular-nums">
               <span>{notesText.trim().length.toLocaleString()} chars</span>
               {notesText.length > 0 && (
                 <>
@@ -211,9 +211,9 @@ export function InputStudio({
                   <button
                     type="button"
                     onClick={() => onChangeNotesText('')}
-                    className="font-medium text-slate-600 hover:text-slate-900 underline underline-offset-2"
+                    className="font-medium text-[#005BB5] hover:text-[#004494] underline underline-offset-2"
                   >
-                    Clear notes
+                    Clear
                   </button>
                 </>
               )}
@@ -228,8 +228,8 @@ export function InputStudio({
               onChangeNotesText(e.target.value);
             }}
             rows={12}
-            placeholder="Paste NCERT paragraphs, derivations, circuit laws, reaction mechanisms, or messy lecture notes here..."
-            className="w-full flex-1 min-h-[260px] resize-y rounded-lg border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/15"
+            placeholder="Paste class notes, textbook chapters, history timelines, economics concepts, formulas, or study guides from any subject..."
+            className="w-full flex-1 min-h-[260px] resize-y rounded-2xl border border-white/80 bg-white/55 backdrop-blur-md px-4 py-3.5 text-sm leading-relaxed text-slate-900 placeholder:text-slate-500 shadow-[inset_0_1px_3px_rgba(15,58,128,0.06)] transition-all focus:border-[#0063D1]/60 focus:bg-white/85 focus:outline-none focus:ring-3 focus:ring-[#0063D1]/15"
           />
 
           {/* File Upload Dropzone */}
@@ -240,10 +240,10 @@ export function InputStudio({
             }}
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
-            className={`rounded-lg border border-dashed p-4 transition-colors duration-150 ${
+            className={`rounded-2xl border border-dashed p-4 backdrop-blur-md transition-colors duration-150 ${
               isDragging
-                ? 'border-blue-600 bg-blue-50/60'
-                : 'border-slate-300 bg-slate-50/50'
+                ? 'border-[#0063D1] bg-blue-50/75'
+                : 'border-blue-900/15 bg-white/35'
             }`}
           >
             <input
@@ -260,14 +260,14 @@ export function InputStudio({
             {attachment ? (
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-blue-700">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/80 bg-white/85 text-[#0063D1]">
                     <FileText className="h-4 w-4" aria-hidden="true" />
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-slate-900">
                       {attachment.name}
                     </p>
-                    <p className="text-xs text-slate-500 tabular-nums">
+                    <p className="text-xs text-slate-600 tabular-nums">
                       {attachment.mimeType} · {formatBytes(attachment.sizeBytes)}
                     </p>
                   </div>
@@ -276,7 +276,7 @@ export function InputStudio({
                   type="button"
                   aria-label={`Remove attached file ${attachment.name}`}
                   onClick={() => onChangeAttachment(null)}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-red-50 hover:border-red-200 hover:text-red-700"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-white/80 bg-white/75 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-red-50 hover:border-red-200 hover:text-red-700"
                 >
                   <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>Remove</span>
@@ -285,22 +285,22 @@ export function InputStudio({
             ) : (
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/80 bg-white/75 text-[#0063D1]">
                     <Upload className="h-4 w-4" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-800">
-                      Attach textbook PDF, Markdown notes, or diagram photo
+                      Attach a PDF, notes file, or page photo
                     </p>
-                    <p className="text-xs text-slate-500">
-                      Supports PDF, TXT, MD, CSV, PNG, JPG, WEBP up to 8 MB
+                    <p className="text-xs text-slate-600">
+                      PDF, TXT, MD, CSV, PNG, JPG, WEBP up to 8 MB
                     </p>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-800 whitespace-nowrap shrink-0 hover:bg-slate-50"
+                  className="mac-glass-subtle inline-flex items-center justify-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 whitespace-nowrap shrink-0 transition-colors hover:bg-white/90 hover:text-[#005BB5]"
                 >
                   <Paperclip className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>Choose File</span>
@@ -310,20 +310,20 @@ export function InputStudio({
           </div>
         </div>
 
-        {/* Right Zone: Syllabus, Rigor & Model Configuration */}
-        <div className="lg:col-span-6 space-y-5 rounded-xl border border-slate-200 bg-white p-5 sm:p-6">
+        {/* Right Zone: Study Settings */}
+        <div className="mac-glass lg:col-span-6 space-y-5 rounded-3xl p-5 sm:p-6">
           <div className="space-y-1.5">
             <label
               htmlFor="syllabus-select"
               className="block text-sm font-semibold text-slate-900"
             >
-              Syllabus Alignment
+              Study Level (Works for Any Subject)
             </label>
             <select
               id="syllabus-select"
               value={syllabus}
               onChange={(e) => onChangeSyllabus(e.target.value as SyllabusTrack)}
-              className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/15"
+              className="w-full rounded-xl border border-white/80 bg-white/60 backdrop-blur-md px-3.5 py-2.5 text-sm font-medium text-slate-900 shadow-2xs transition-colors focus:border-[#0063D1]/60 focus:bg-white/90 focus:outline-none focus:ring-3 focus:ring-[#0063D1]/15"
             >
               {SYLLABUS_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>
@@ -333,15 +333,15 @@ export function InputStudio({
             </select>
           </div>
 
-          {/* Rigor Level Segmented Selector */}
+          {/* Difficulty Segmented Selector */}
           <div className="space-y-2">
             <span className="block text-sm font-semibold text-slate-900">
-              Cognitive Rigor
+              Difficulty
             </span>
             <div
               role="group"
-              aria-label="Cognitive rigor level"
-              className="flex flex-col gap-1 sm:flex-row rounded-lg bg-slate-100 p-1"
+              aria-label="Difficulty level"
+              className="flex flex-col gap-1 sm:flex-row rounded-xl bg-blue-950/[0.06] p-1 ring-1 ring-white/60"
             >
               {RIGOR_OPTIONS.map((opt) => {
                 const active = rigor === opt.value;
@@ -351,9 +351,9 @@ export function InputStudio({
                     type="button"
                     aria-pressed={active}
                     onClick={() => onChangeRigor(opt.value)}
-                    className={`flex-1 rounded-md px-3 py-2 text-xs font-semibold transition-colors duration-150 whitespace-nowrap ${
+                    className={`flex-1 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-150 whitespace-nowrap ${
                       active
-                        ? 'bg-white text-blue-700 shadow-xs'
+                        ? 'bg-white/90 text-[#005BB5] shadow-[0_2px_6px_rgba(15,58,128,0.1)]'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -363,7 +363,7 @@ export function InputStudio({
               })}
             </div>
             {activeRigorMeta && (
-              <p className="text-xs leading-relaxed text-slate-500">
+              <p className="text-xs leading-relaxed text-slate-600">
                 {activeRigorMeta.summary}
               </p>
             )}
@@ -373,16 +373,16 @@ export function InputStudio({
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <span className="block text-sm font-semibold text-slate-900">
-                Output Mode
+                What to Create
               </span>
               <div
                 role="group"
                 aria-label="Output format mode"
-                className="flex rounded-lg bg-slate-100 p-1"
+                className="flex rounded-xl bg-blue-950/[0.06] p-1 ring-1 ring-white/60"
               >
                 {(
                   [
-                    { id: 'mixed', label: 'Mixed' },
+                    { id: 'mixed', label: 'Both' },
                     { id: 'flashcards', label: 'Cards' },
                     { id: 'quiz', label: 'Quiz' },
                   ] as const
@@ -394,9 +394,9 @@ export function InputStudio({
                       type="button"
                       aria-pressed={active}
                       onClick={() => onChangeOutputMode(mode.id)}
-                      className={`flex-1 rounded-md px-2.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors duration-150 ${
+                      className={`flex-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-150 ${
                         active
-                          ? 'bg-white text-blue-700 shadow-xs'
+                          ? 'bg-white/90 text-[#005BB5] shadow-[0_2px_6px_rgba(15,58,128,0.1)]'
                           : 'text-slate-600 hover:text-slate-900'
                       }`}
                     >
@@ -412,13 +412,13 @@ export function InputStudio({
                 htmlFor="item-count-select"
                 className="block text-sm font-semibold text-slate-900"
               >
-                Atomic Items
+                Number of Questions
               </label>
               <select
                 id="item-count-select"
                 value={itemCount}
                 onChange={(e) => onChangeItemCount(Number(e.target.value))}
-                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 tabular-nums focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/15"
+                className="w-full rounded-xl border border-white/80 bg-white/60 backdrop-blur-md px-3 py-2 text-sm font-medium text-slate-900 tabular-nums shadow-2xs focus:border-[#0063D1]/60 focus:bg-white/90 focus:outline-none focus:ring-3 focus:ring-[#0063D1]/15"
               >
                 {ITEM_COUNT_OPTIONS.map((count) => (
                   <option key={count} value={count}>
@@ -429,12 +429,12 @@ export function InputStudio({
             </div>
           </div>
 
-          {/* Reasoning Engine Selector */}
+          {/* Speed & Quality Selector */}
           <div className="space-y-2">
             <span className="block text-sm font-semibold text-slate-900">
-              Reasoning Engine
+              Speed &amp; Quality
             </span>
-            <div className="grid grid-cols-1 gap-2">
+            <div className="grid grid-cols-1 gap-2.5">
               {MODEL_OPTIONS.map((opt) => {
                 const selected = model === opt.id;
                 return (
@@ -443,16 +443,16 @@ export function InputStudio({
                     type="button"
                     aria-pressed={selected}
                     onClick={() => onChangeModel(opt.id)}
-                    className={`flex flex-col items-start rounded-lg border px-3.5 py-2.5 text-left transition-colors duration-150 ${
+                    className={`flex flex-col items-start rounded-2xl border px-4 py-3 text-left transition-all duration-150 ${
                       selected
-                        ? 'border-blue-600 bg-blue-50/40'
-                        : 'border-slate-200 bg-white hover:border-slate-300'
+                        ? 'border-[#0063D1]/55 bg-blue-50/65 backdrop-blur-md ring-2 ring-[#0063D1]/15 shadow-xs'
+                        : 'border-white/75 bg-white/45 hover:bg-white/75'
                     }`}
                   >
                     <div className="flex w-full items-center justify-between gap-2">
                       <span
                         className={`text-sm font-semibold ${
-                          selected ? 'text-blue-800' : 'text-slate-900'
+                          selected ? 'text-[#004E9E]' : 'text-slate-900'
                         }`}
                       >
                         {opt.label}
@@ -473,16 +473,16 @@ export function InputStudio({
             type="button"
             disabled={isGenerating}
             onClick={onSubmitGenerate}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mac-btn-primary flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isGenerating ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                <span>Forging Atomic Recall Set...</span>
+                <span>Creating your study set...</span>
               </>
             ) : (
               <>
-                <span>Forge Recall Set</span>
+                <span>Create Flashcards &amp; Quiz</span>
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </>
             )}
@@ -490,25 +490,25 @@ export function InputStudio({
         </div>
       </div>
 
-      {/* Ready-to-Study CBSE Sample Decks */}
-      <div className="border-t border-slate-200 pt-8">
+      {/* Ready-to-Study Sample Decks */}
+      <div className="border-t border-white/60 pt-8">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
           <h2 className="font-display text-lg font-semibold text-slate-900">
-            Ready-to-Study CBSE Reference Decks
+            Sample Study Decks
           </h2>
-          <p className="text-xs text-slate-500">
-            Inspect active-recall mechanics immediately without waiting
+          <p className="text-xs text-slate-600">
+            Open a ready-made deck right away to see how cards and quizzes work
           </p>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {SAMPLE_PRESETS.map((preset) => (
             <div
               key={preset.id}
-              className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5"
+              className="mac-glass flex flex-col justify-between rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5"
             >
               <div className="space-y-2">
-                <p className="text-xs font-medium text-slate-500">
-                  {preset.syllabus} · {preset.deck.rigor}
+                <p className="text-xs font-medium text-[#005BB5]">
+                  {preset.label} · {preset.deck.rigor}
                 </p>
                 <h3 className="font-display text-base font-semibold text-slate-900">
                   {preset.deck.title}
@@ -518,17 +518,17 @@ export function InputStudio({
                   {preset.deck.flashcards.length === 1 ? 'flashcard' : 'flashcards'} ·{' '}
                   {preset.deck.quizQuestions.length}{' '}
                   {preset.deck.quizQuestions.length === 1
-                    ? 'diagnostic quiz item'
-                    : 'diagnostic quiz items'}
+                    ? 'quiz question'
+                    : 'quiz questions'}
                 </p>
               </div>
-              <div className="mt-4 flex items-center gap-3 pt-3 border-t border-slate-100">
+              <div className="mt-4 flex items-center gap-3 pt-3 border-t border-white/60">
                 <button
                   type="button"
                   onClick={() => onOpenSampleDeckDirectly(preset)}
-                  className="text-xs font-semibold text-blue-700 hover:text-blue-900"
+                  className="text-xs font-semibold text-[#005BB5] hover:text-[#004494]"
                 >
-                  Open in Recall Studio
+                  Open Flashcards
                 </button>
                 <span aria-hidden="true" className="text-slate-300">
                   ·
@@ -538,7 +538,7 @@ export function InputStudio({
                   onClick={() => onLoadPresetNotes(preset)}
                   className="text-xs font-medium text-slate-600 hover:text-slate-900"
                 >
-                  Load Notes
+                  Use These Notes
                 </button>
               </div>
             </div>

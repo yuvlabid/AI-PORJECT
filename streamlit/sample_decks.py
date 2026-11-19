@@ -1,8 +1,8 @@
 SAMPLE_PRESETS = [
     {
         "id": "cbse-phy-emi",
-        "label": "Class 12 Physics · Lenz Law & Motional EMF",
-        "syllabus": "CBSE Class 12 Physics",
+        "label": "Physics · Lenz Law",
+        "syllabus": "CBSE Class 11–12 (All Subjects)",
         "notes_text": (
             "Electromagnetic Induction (NCERT Ch. 6):\n"
             "Faraday's law gives induced emf e = -dΦ_B/dt where magnetic flux Φ_B = B · A = BA cos θ.\n"
@@ -13,12 +13,12 @@ SAMPLE_PRESETS = [
         "deck": {
             "id": "sample-cbse-phy-emi",
             "title": "Electromagnetic Induction: Lenz Sign & Energy Coupling",
-            "syllabus": "CBSE Class 12 Physics",
-            "rigor": "Application & HOTS",
+            "syllabus": "CBSE Class 11–12 (All Subjects)",
+            "rigor": "Challenge",
             "outputMode": "mixed",
             "modelUsed": "sample",
             "sourceExcerpt": "Faraday's law gives induced emf e = -dΦ_B/dt...",
-            "syllabusSummary": "CBSE Class 12 Physics · Ch. 6 Electromagnetic Induction · Application & HOTS",
+            "syllabusSummary": "CBSE Class 11–12 · Physics Ch. 6 Electromagnetic Induction · Challenge",
             "flashcards": [
                 {
                     "id": "sample-fc-1",
@@ -69,8 +69,8 @@ SAMPLE_PRESETS = [
     },
     {
         "id": "cbse-chem-electrochem",
-        "label": "Class 12 Chemistry · Nernst Equation & Cell Sign",
-        "syllabus": "CBSE Class 12 Chemistry",
+        "label": "Chemistry · Nernst Equation",
+        "syllabus": "CBSE Class 11–12 (All Subjects)",
         "notes_text": (
             "Electrochemistry (NCERT Ch. 2):\n"
             "E°_cell = E°_cathode - E°_anode (standard reduction potentials). "
@@ -79,12 +79,12 @@ SAMPLE_PRESETS = [
         "deck": {
             "id": "sample-cbse-chem-electrochem",
             "title": "Electrochemistry: Nernst Perturbations & Conductivity Regimes",
-            "syllabus": "CBSE Class 12 Chemistry",
-            "rigor": "Application & HOTS",
+            "syllabus": "CBSE Class 11–12 (All Subjects)",
+            "rigor": "Challenge",
             "outputMode": "mixed",
             "modelUsed": "sample",
             "sourceExcerpt": "E°_cell = E°_cathode - E°_anode...",
-            "syllabusSummary": "CBSE Class 12 Chemistry · Ch. 2 Electrochemistry · Application & HOTS",
+            "syllabusSummary": "CBSE Class 11–12 · Chemistry Ch. 2 Electrochemistry · Challenge",
             "flashcards": [
                 {
                     "id": "sample-chem-fc-1",

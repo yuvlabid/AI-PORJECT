@@ -33,14 +33,14 @@ class TestStreamlitRecallLogic(unittest.TestCase):
 
     def test_system_instruction_rules(self):
         prompt = recall_logic.build_system_instruction(
-            syllabus="CBSE Class 12 Physics",
-            rigor="Application & HOTS",
+            syllabus="CBSE Class 11–12 (All Subjects)",
+            rigor="Challenge",
             output_mode="mixed",
             item_count=6,
         )
         self.assertIn("Ban Trivia & Rote Lookups", prompt)
         self.assertIn("Atomic Boundaries", prompt)
-        self.assertIn("CBSE Class 12 Physics", prompt)
+        self.assertIn("CBSE Class 11–12 (All Subjects)", prompt)
 
     def test_extract_json_ignores_thinking_parts(self):
         thought_part = py_types.SimpleNamespace(thought=True, text="internal reasoning...")

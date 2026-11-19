@@ -11,8 +11,8 @@ export interface SampleNotePreset {
 export const SAMPLE_PRESETS: SampleNotePreset[] = [
   {
     id: 'cbse-phy-emi',
-    label: 'Class 12 Physics · Lenz Law & Motional EMF',
-    syllabus: 'CBSE Class 12 Physics',
+    label: 'Physics · Lenz Law',
+    syllabus: 'CBSE Class 11–12 (All Subjects)',
     notesText: `Electromagnetic Induction (NCERT Ch. 6):
 Faraday's law gives induced emf e = -dΦ_B/dt where magnetic flux Φ_B = B · A = BA cos θ.
 The negative sign represents Lenz's law: the polarity of induced emf is such that it tends to produce a current which opposes the change in magnetic flux that produced it (conservation of energy).
@@ -21,14 +21,14 @@ Self-inductance L of a solenoid: Φ = LI, back emf e = -L(dI/dt), stored magneti
     deck: {
       id: 'sample-cbse-phy-emi',
       title: 'Electromagnetic Induction: Lenz Sign & Energy Coupling',
-      syllabus: 'CBSE Class 12 Physics',
-      rigor: 'Application & HOTS',
+      syllabus: 'CBSE Class 11–12 (All Subjects)',
+      rigor: 'Challenge',
       outputMode: 'mixed',
       modelUsed: 'sample',
       createdAt: '2026-11-18T00:00:00.000Z',
       sourceExcerpt:
         "Faraday's law gives induced emf e = -dΦ_B/dt where magnetic flux Φ_B = B · A = BA cos θ...",
-      syllabusSummary: 'CBSE Class 12 Physics · Ch. 6 Electromagnetic Induction · Application & HOTS',
+      syllabusSummary: 'CBSE Class 11–12 · Physics Ch. 6 Electromagnetic Induction · Challenge',
       flashcards: [
         {
           id: 'sample-fc-1',
@@ -161,8 +161,8 @@ Self-inductance L of a solenoid: Φ = LI, back emf e = -L(dI/dt), stored magneti
   },
   {
     id: 'cbse-chem-electrochem',
-    label: 'Class 12 Chemistry · Nernst Equation & Cell Sign',
-    syllabus: 'CBSE Class 12 Chemistry',
+    label: 'Chemistry · Nernst Equation',
+    syllabus: 'CBSE Class 11–12 (All Subjects)',
     notesText: `Electrochemistry (NCERT Ch. 2):
 Standard EMF of a galvanic cell: E°_cell = E°_cathode - E°_anode (both written as standard reduction potentials).
 Nernst equation at 298 K: E_cell = E°_cell - (0.0591 / n) log10(Q), where Q = [Products]^p / [Reactants]^r (pure solids and liquids take activity = 1).
@@ -172,14 +172,14 @@ Kohlrausch law of independent migration of ions: Λ°_m(weak electrolyte) increa
     deck: {
       id: 'sample-cbse-chem-electrochem',
       title: 'Electrochemistry: Nernst Perturbations & Conductivity Regimes',
-      syllabus: 'CBSE Class 12 Chemistry',
-      rigor: 'Application & HOTS',
+      syllabus: 'CBSE Class 11–12 (All Subjects)',
+      rigor: 'Challenge',
       outputMode: 'mixed',
       modelUsed: 'sample',
       createdAt: '2026-11-18T00:00:00.000Z',
       sourceExcerpt:
         'Standard EMF of a galvanic cell: E°_cell = E°_cathode - E°_anode (both written as standard reduction potentials)...',
-      syllabusSummary: 'CBSE Class 12 Chemistry · Ch. 2 Electrochemistry · Application & HOTS',
+      syllabusSummary: 'CBSE Class 11–12 · Chemistry Ch. 2 Electrochemistry · Challenge',
       flashcards: [
         {
           id: 'sample-chem-fc-1',
@@ -247,8 +247,8 @@ Kohlrausch law of independent migration of ions: Λ°_m(weak electrolyte) increa
   },
   {
     id: 'cbse-bio-lac-operon',
-    label: 'Class 12 Biology · Lac Operon Negative Control',
-    syllabus: 'CBSE Class 12 Biology',
+    label: 'Biology · Lac Operon',
+    syllabus: 'CBSE Class 11–12 (All Subjects)',
     notesText: `Molecular Basis of Inheritance (NCERT Ch. 5) — The Lac Operon:
 The lac operon consists of one regulatory gene (i gene coding for repressor protein) and three structural genes (z for β-galactosidase, y for permease, a for transacetylase).
 In the absence of an inducer (lactose / allolactose), the active repressor binds to the operator region (o) and prevents RNA polymerase from transcribing the operon.
@@ -256,14 +256,14 @@ In the presence of lactose, allolactose binds to the repressor, inducing a confo
     deck: {
       id: 'sample-cbse-bio-lac-operon',
       title: 'Lac Operon: Repressor Mutations & Inducer Logic',
-      syllabus: 'CBSE Class 12 Biology',
-      rigor: 'Edge-Case & Olympiad',
+      syllabus: 'CBSE Class 11–12 (All Subjects)',
+      rigor: 'Advanced',
       outputMode: 'mixed',
       modelUsed: 'sample',
       createdAt: '2026-11-18T00:00:00.000Z',
       sourceExcerpt:
         'The lac operon consists of one regulatory gene (i gene coding for repressor protein) and three structural genes (z, y, a)...',
-      syllabusSummary: 'CBSE Class 12 Biology · Ch. 5 Molecular Basis · Edge-Case & Olympiad',
+      syllabusSummary: 'CBSE Class 11–12 · Biology Ch. 5 Molecular Basis · Advanced',
       flashcards: [
         {
           id: 'sample-bio-fc-1',

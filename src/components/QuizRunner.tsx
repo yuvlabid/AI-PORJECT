@@ -27,18 +27,17 @@ export function QuizRunner({
 
   if (!deck) {
     return (
-      <section className="mx-auto max-w-2xl rounded-xl border border-slate-200 bg-white p-10 text-center space-y-4">
+      <section className="mac-glass mx-auto max-w-2xl rounded-3xl p-10 text-center space-y-4">
         <h2 className="font-display text-2xl font-bold text-slate-900">
-          No Diagnostic Quiz Loaded
+          No Quiz Loaded Yet
         </h2>
-        <p className="text-sm leading-relaxed text-slate-600">
-          Generate a quiz in the Studio or open a CBSE reference deck to diagnose
-          conceptual traps and distractor misconceptions.
+        <p className="text-sm leading-relaxed text-slate-700">
+          Create a quiz in the Studio or open a sample deck to test what you know.
         </p>
         <button
           type="button"
           onClick={onGoToStudio}
-          className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-800"
+          className="mac-btn-primary inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold"
         >
           Go to Studio
         </button>
@@ -48,20 +47,19 @@ export function QuizRunner({
 
   if (questions.length === 0) {
     return (
-      <section className="mx-auto max-w-2xl rounded-xl border border-slate-200 bg-white p-10 text-center space-y-4">
+      <section className="mac-glass mx-auto max-w-2xl rounded-3xl p-10 text-center space-y-4">
         <h2 className="font-display text-2xl font-bold text-slate-900">
-          This deck contains flashcards only
+          This deck only has flashcards
         </h2>
-        <p className="text-sm text-slate-600">
-          Switch to Active Recall to study the {deck.flashcards.length} flashcards for{' '}
-          {deck.title}, or generate a Mixed / Quiz set in the Studio.
+        <p className="text-sm text-slate-700">
+          Switch to Flashcards to study the {deck.flashcards.length} cards in {deck.title}.
         </p>
         <button
           type="button"
           onClick={onGoToRecall}
-          className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-800"
+          className="mac-btn-primary inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold"
         >
-          Open Active Recall
+          Open Flashcards
         </button>
       </section>
     );
@@ -72,10 +70,10 @@ export function QuizRunner({
   return (
     <section aria-labelledby="quiz-heading" className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 border-b border-slate-200 pb-5 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-4 border-b border-white/60 pb-5 md:flex-row md:items-end md:justify-between">
         <div className="space-y-1.5">
-          <p className="text-xs font-medium text-slate-500">
-            {deck.syllabus} · {deck.rigor} · Diagnostic Assessment
+          <p className="text-xs font-medium text-[#005BB5]">
+            {deck.syllabus} · {deck.rigor} · Practice Quiz
           </p>
           <h1
             id="quiz-heading"
@@ -87,8 +85,8 @@ export function QuizRunner({
 
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <p className="text-xs text-slate-500">Diagnostic Score</p>
-            <p className="font-mono text-lg font-semibold text-slate-900 tabular-nums">
+            <p className="text-xs text-slate-600">Score</p>
+            <p className="font-mono text-lg font-semibold text-[#005BB5] tabular-nums">
               {score.correctCount} / {questions.length} ({score.accuracyPercent}%)
             </p>
           </div>
@@ -98,7 +96,7 @@ export function QuizRunner({
               setSubmissions({});
               setConvertedOnce(false);
             }}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+            className="mac-glass-subtle inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-medium text-slate-700 hover:bg-white/90"
           >
             <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
             <span>Retake Quiz</span>
@@ -108,15 +106,15 @@ export function QuizRunner({
 
       {/* End-of-Quiz Action Banner */}
       {allAnswered && (
-        <div className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mac-glass flex flex-col gap-4 rounded-2xl p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h2 className="font-display text-lg font-semibold text-slate-900">
-              Diagnostic Complete — {score.accuracyPercent}% Accuracy
+              Quiz Complete — {score.accuracyPercent}%
             </h2>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-700">
               {score.missedQuestionIds.length === 0
-                ? 'Zero misconceptions detected across all tested scenarios.'
-                : `${score.missedQuestionIds.length} missed item(s) identified for targeted active-recall reinforcement.`}
+                ? 'Great job — you answered every question right.'
+                : `You missed ${score.missedQuestionIds.length} question(s). Turn them into flashcards to practice again.`}
             </p>
           </div>
 
@@ -128,13 +126,13 @@ export function QuizRunner({
                 onConvertMissedToFlashcards(score.missedQuestionIds);
                 setConvertedOnce(true);
               }}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2.5 text-xs font-semibold text-white whitespace-nowrap shrink-0 hover:bg-blue-800 disabled:opacity-60"
+              className="mac-btn-primary inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold whitespace-nowrap shrink-0 disabled:opacity-60"
             >
               <Layers className="h-4 w-4" aria-hidden="true" />
               <span>
                 {convertedOnce
                   ? 'Added to Flashcards'
-                  : `Convert ${score.missedQuestionIds.length} Missed to Flashcards`}
+                  : `Add ${score.missedQuestionIds.length} Missed to Flashcards`}
               </span>
             </button>
           )}
@@ -150,17 +148,17 @@ export function QuizRunner({
           return (
             <article
               key={question.id}
-              className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5"
+              className="mac-glass rounded-3xl p-5 sm:p-6 space-y-5"
             >
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                <div className="text-xs font-medium text-slate-500">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/60 pb-3">
+                <div className="text-xs font-medium text-slate-600">
                   <span className="font-mono font-semibold text-slate-900 tabular-nums">
                     Q{qIndex + 1}
                   </span>
                   <span aria-hidden="true"> · </span>
                   <span className="font-semibold text-slate-900">{question.concept}</span>
                   <span aria-hidden="true"> · </span>
-                  <span className="text-blue-700">{question.mechanism}</span>
+                  <span className="text-[#005BB5]">{question.mechanism}</span>
                 </div>
                 <span className="text-xs text-slate-500">{question.syllabusTag}</span>
               </div>
@@ -176,16 +174,16 @@ export function QuizRunner({
                   const isCorrectOption = optIndex === question.correctIndex;
 
                   let buttonStyle =
-                    'border-slate-200 bg-white text-slate-800 hover:border-blue-300 hover:bg-blue-50/30';
+                    'border-white/80 bg-white/55 text-slate-800 hover:border-[#0063D1]/45 hover:bg-blue-50/60';
 
                   if (isAnswered) {
                     if (isCorrectOption) {
                       buttonStyle =
-                        'border-emerald-300 bg-emerald-50/70 text-emerald-950';
+                        'border-emerald-300 bg-emerald-50/85 text-emerald-950';
                     } else if (isSelected) {
-                      buttonStyle = 'border-red-300 bg-red-50/70 text-red-950';
+                      buttonStyle = 'border-red-300 bg-red-50/85 text-red-950';
                     } else {
-                      buttonStyle = 'border-slate-200 bg-slate-50/60 text-slate-500';
+                      buttonStyle = 'border-white/60 bg-white/35 text-slate-500';
                     }
                   }
 
@@ -203,7 +201,7 @@ export function QuizRunner({
                           },
                         }));
                       }}
-                      className={`flex w-full items-start justify-between gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-colors duration-150 ${buttonStyle}`}
+                      className={`flex w-full items-start justify-between gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-all duration-150 ${buttonStyle}`}
                     >
                       <div className="flex items-start gap-3">
                         <span className="mt-0.5 font-mono text-xs font-semibold text-slate-500">
@@ -222,7 +220,7 @@ export function QuizRunner({
                       {isAnswered && isSelected && !isCorrectOption && (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-800 whitespace-nowrap shrink-0">
                           <XCircle className="h-4 w-4 text-red-700" aria-hidden="true" />
-                          <span>Selected</span>
+                          <span>Your Choice</span>
                         </span>
                       )}
                     </button>
@@ -230,12 +228,12 @@ export function QuizRunner({
                 })}
               </div>
 
-              {/* Diagnostic Misconception Breakdown */}
+              {/* Explanation Breakdown */}
               {isAnswered && (
-                <div className="space-y-3 rounded-lg border border-slate-200 bg-slate-50/80 p-4 text-sm">
+                <div className="space-y-3 rounded-2xl border border-white/75 bg-white/55 backdrop-blur-md p-4 text-sm">
                   <div>
                     <p className="font-semibold text-slate-900">
-                      Governing Derivation &amp; Principle
+                      Why this is right
                     </p>
                     <p className="mt-1 leading-relaxed text-slate-700">
                       {question.correctExplanation}
@@ -243,9 +241,9 @@ export function QuizRunner({
                   </div>
 
                   {question.distractorNotes.length > 0 && (
-                    <div className="border-t border-slate-200 pt-3">
+                    <div className="border-t border-white/70 pt-3">
                       <p className="text-xs font-semibold text-slate-700">
-                        Why Distractors Fail (Misconception Analysis)
+                        Why the other options are wrong
                       </p>
                       <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-slate-600">
                         {question.distractorNotes.map((note, idx) => (
